@@ -10,13 +10,29 @@ internal class Day2Puzzle : Puzzle
     {
         var data = await GetDataAsync();
 
-        return $"Calibration value: 1";
+        var games = data.Select(GameBuilder.Build);
+
+        var sum = games
+            .Where(g => g.MaxRed <= 12
+                && g.MaxGreen <= 13
+                && g.MaxBlue <= 14)
+            .Sum(g => g.GameId);
+
+        return $"Game ID total: {sum}";
     }
 
     public override async Task<string> GetPart2AnswerAsync()
     {
         var data = await GetDataAsync();
 
-        return $"Calibration value: 2";
+        var games = data.Select(GameBuilder.Build);
+
+        var sum = games
+            .Select(g => g.Pulls.Max(p => p.RedCount)
+                * g.Pulls.Max(p => p.GreenCount)
+                * g.Pulls.Max(p => p.BlueCount))
+            .Sum();
+
+        return $"Game ID total: {sum}";
     }
 }
