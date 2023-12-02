@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode2023.Puzzles;
+﻿namespace AdventOfCode2023.Puzzles.Day1;
 
-internal class Day1(string dataPath) : Puzzle(dataPath)
+internal class Day1Puzzle : Puzzle
 {
     private readonly Dictionary<string, string> _digits = new()
     {
@@ -15,6 +15,10 @@ internal class Day1(string dataPath) : Puzzle(dataPath)
         { "8", "eight" },
         { "9", "nine" }
     };
+
+    public override string Year => "2023";
+
+    public override string Day => "1";
 
     public override async Task<string> GetPart1AnswerAsync()
     {

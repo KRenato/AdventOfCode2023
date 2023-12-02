@@ -1,8 +1,19 @@
 ﻿namespace AdventOfCode2023.Puzzles;
 
-internal abstract class Puzzle(string dataPath) : IPuzzle
+internal abstract class Puzzle : IPuzzle
 {
-    private readonly Lazy<Task<string[]>> _data = new(() => GetDataTask(dataPath));
+    private readonly Lazy<Task<string[]>> _data;
+
+    public Puzzle()
+    {
+        _data = new(() => GetDataTask(DataPath));
+    }
+
+    public abstract string Year { get; }
+
+    public abstract string Day { get; }
+
+    private string DataPath => $"Data\\{Year}-{Day}-Data.txt";
 
     public abstract Task<string> GetPart1AnswerAsync();
 
@@ -21,7 +32,11 @@ internal abstract class Puzzle(string dataPath) : IPuzzle
 
 internal interface IPuzzle
 {
-    public Task<string> GetPart1AnswerAsync();
+    string Year { get; }
 
-    public Task<string> GetPart2AnswerAsync();
+    string Day { get; }
+
+    Task<string> GetPart1AnswerAsync();
+
+    Task<string> GetPart2AnswerAsync();
 }
