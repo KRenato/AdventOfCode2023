@@ -43,8 +43,8 @@ internal class Day1(string dataPath) : Puzzle(dataPath)
 
         foreach (var value in data)
         {
-            var firstDigit = GetFirstDigit(value) ?? throw new InvalidOperationException("No digit found.");
-            var lastDigit = GetLastDigit(value) ?? throw new InvalidOperationException("No digit found.");
+            var firstDigit = FindFirstDigit(value) ?? throw new InvalidOperationException("No digit found.");
+            var lastDigit = FindLastDigit(value) ?? throw new InvalidOperationException("No digit found.");
 
             var number = int.Parse(firstDigit + lastDigit);
 
@@ -54,7 +54,7 @@ internal class Day1(string dataPath) : Puzzle(dataPath)
         return $"Calibration value: {total}";
     }
 
-    private string? GetFirstDigit(string value)
+    private string? FindFirstDigit(string value)
     {
         for (int i = 0; i < value.Length; i++)
         {
@@ -66,7 +66,7 @@ internal class Day1(string dataPath) : Puzzle(dataPath)
         return null;
     }
 
-    private string? GetLastDigit(string value)
+    private string? FindLastDigit(string value)
     {
         for (int i = value.Length - 1; i >= 0; i--)
         {
