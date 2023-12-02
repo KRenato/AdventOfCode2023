@@ -82,8 +82,11 @@ internal class Day1(string dataPath) : Puzzle(dataPath)
     {
         foreach (var digit in _digits)
         {
-            if (value[idx].ToString() == digit.Key ||
-                (value.Length - idx >= digit.Value.Length && value[idx..(idx + digit.Value.Length)] == digit.Value))
+            bool foundNumeric = value[idx].ToString() == digit.Key;
+            bool foundText = value.Length - idx >= digit.Value.Length
+                && value[idx..(idx + digit.Value.Length)] == digit.Value;
+
+            if (foundNumeric || foundText)
             {
                 return digit.Key;
             }
