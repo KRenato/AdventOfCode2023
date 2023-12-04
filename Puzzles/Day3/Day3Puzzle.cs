@@ -1,7 +1,6 @@
-﻿using AdventOfCode2023.Puzzles.Day3;
-using Common;
+﻿using Common;
 
-namespace AdventOfCode2023.Puzzles.Day1;
+namespace AdventOfCode2023.Puzzles.Day3;
 
 internal class Day3Puzzle : Puzzle
 {
