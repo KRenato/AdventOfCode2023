@@ -10,13 +10,36 @@ internal class Day4Puzzle : Puzzle
     {
         var data = await GetDataAsync();
 
-        return "Day 4";
+        var score = data.Select(v => CardBuilder.Build(v).GetScore()).Sum();
+
+        return $"Score: {score}";
     }
 
     public override async Task<string> GetPart2AnswerAsync()
     {
         var data = await GetDataAsync();
 
-        return "Day 4";
+        var cards = data.Select(CardBuilder.Build);
+        var cardCounts = new Dictionary<int, int>();
+
+        foreach (var card in cards)
+        {
+            IncrementCardCount(cardCounts, card.CardId, 1);
+
+            for (int i = card.CardId + 1; i <= card.NumberOfWinners + card.CardId; i++)
+            {
+                IncrementCardCount(cardCounts, i, cardCounts[card.CardId]);
+            }
+        }
+
+        return $"Total cards: {cardCounts.Values.Sum()}";
+    }
+
+    private static void IncrementCardCount(Dictionary<int, int> counts, int id, int amount)
+    {
+        if (counts.ContainsKey(id))
+            counts[id] += amount;
+        else
+            counts[id] = amount;
     }
 }
